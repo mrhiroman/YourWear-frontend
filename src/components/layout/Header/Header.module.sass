@@ -1,0 +1,146 @@
+@mixin barlow-400
+    font-family: 'Barlow', sans-serif
+    font-weight: 400
+
+@mixin barlow-600
+    font-family: 'Barlow', sans-serif
+    font-weight: 600
+
+@mixin montserrat
+    font-family: 'Montserrat', sans-serif
+    font-weight: 500
+
+.layout
+    display: flex
+    flex-direction: column
+
+.header
+    &Upper
+        background: #143A79
+        height: 48px
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+    &Main
+        height: 120px
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+        &Left
+            display: flex
+            flex-direction: row
+            justify-content: space-around
+            margin-left: 8%
+
+.upper
+    &Left
+        display: flex
+        flex-direction: row
+        gap: 24px
+        @include barlow-400
+        color: white
+        margin-left: 8%
+        padding: 14px 0
+
+    &Right
+        display: flex
+        flex-direction: row
+        gap: 16px
+        @include barlow-400
+        color: white
+        margin-right: 8%
+        padding: 9px 0
+
+.elementUpper
+    display: flex
+    justify-content: center
+    gap: 4px
+
+.picker
+    display: flex
+    align-items: center
+    border: 1px solid #FFFFFF
+    border-radius: 24px
+    padding: 4px 10px
+    line-height: 24px
+    cursor: pointer
+    transition: all 0.2s ease
+
+    &:hover
+        background: #102a55
+
+.logoContainer
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 10px
+    cursor: pointer
+    @include montserrat
+    font-size: 28px
+    line-height: 36px
+    color: #143A79
+    gap: 10px
+
+    .logo
+        margin-top: 6px
+
+.navigation
+    display: flex
+    flex-direction: row
+    align-items: center
+    margin-left: 84px
+    gap: 40px
+    @include barlow-400
+    font-size: 20px
+    line-height: 30px
+
+    a
+        text-decoration: none
+        color: black
+
+.buttons
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 40px
+    margin-right: 8%
+
+    &Icons, &Full
+        display: flex
+        flex-direction: row
+        gap: 16px
+
+.icon
+    cursor: pointer
+
+.button
+    padding: 12px 20px
+    border-radius: 80px
+    @include barlow-600
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 16px
+    line-height: 24px
+    cursor: pointer
+    transition: all 0.2s ease
+
+    &Blue
+        color: white
+        background: #143A79
+        border: 1px solid #143A79
+
+        &:hover
+            border: 1px solid #6c92ce
+            background: #6c92ce
+            color: white
+
+    &White
+        border: 1px solid #143A79
+        color: #143A79
+
+        &:hover
+            color: white
+            background: #6c92ce
+            border: 1px solid #6c92ce
