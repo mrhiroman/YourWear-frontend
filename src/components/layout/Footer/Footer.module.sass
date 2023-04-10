@@ -1,0 +1,72 @@
+@mixin barlow-400
+    font-family: 'Barlow', sans-serif
+    font-weight: 400
+
+@mixin barlow-600
+    font-family: 'Barlow', sans-serif
+    font-weight: 600
+
+@mixin montserrat
+    font-family: 'Montserrat', sans-serif
+    font-weight: 500
+
+.layout
+    display: flex
+    flex-direction: column
+
+.footer
+    &Upper
+        background: #E9F0FB
+        display: flex
+        flex-direction: row
+        padding: 80px 0
+        justify-content: center
+        gap: 80px
+
+    &Lower
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        padding: 40px 8%
+
+.logoContainer
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 10px
+    cursor: pointer
+    @include montserrat
+    font-size: 28px
+    line-height: 36px
+    color: #143A79
+    gap: 10px
+
+    .logo
+        margin-top: 6px
+
+.info
+    margin-top: 10px
+    @include barlow-600
+    font-size: 16px
+
+.column
+    display: flex
+    flex-direction: column
+    gap: 16px
+    @include barlow-400
+    font-size: 16px
+    line-height: 24px
+
+    .category
+        @include barlow-600
+        font-size: 20px
+        line-height: 30px
+
+    a
+        text-decoration: none
+        color: #333333
+        transition: all 0.1s ease
+
+        &:hover
+            color: #143A79
+            opacity: 0.5
