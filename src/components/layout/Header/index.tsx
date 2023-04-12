@@ -12,6 +12,7 @@ import Profile from 'assets/img/header/User.svg'
 
 import Arrow from 'assets/img/header/Arrow.svg'
 import Logo from 'assets/img/Logo.svg'
+import { Button, ButtonType } from 'components/ui/Button'
 
 
 export const Header = () => {
@@ -63,12 +64,8 @@ export const Header = () => {
                     </div>
                 </div>
                 <div className={styles.buttonsFull}>
-                    <div className={`${styles.button} ${styles.buttonBlue}`}>
-                        Register
-                    </div>
-                    <div className={`${styles.button} ${styles.buttonWhite}`}>
-                        Login
-                    </div>
+                    <Button type={ButtonType.Blue} text="Register" />
+                    <Button type={ButtonType.White} text="Login" />
                 </div>
             </div>
         </div>

@@ -1,0 +1,43 @@
+@mixin barlow-600
+    font-family: 'Barlow', sans-serif
+    font-weight: 600
+
+.button
+    padding: 12px 20px
+    border-radius: 80px
+    @include barlow-600
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 16px
+    line-height: 24px
+    cursor: pointer
+    transition: all 0.2s ease
+
+.Blue
+    color: white
+    background: #143A79
+    border: 1px solid #143A79
+
+    &:hover
+        border: 1px solid #6c92ce
+        background: #6c92ce
+        color: white
+
+.White
+    border: 1px solid #143A79
+    color: #143A79
+
+    &:hover
+        color: white
+        background: #6c92ce
+        border: 1px solid #6c92ce
+
+.Yellow
+    border: 1px solid #FFD700
+    background: #FFD700
+    color: #143A79
+
+    &:hover
+        color: white
+        background: #ffb700
+        border: 1px solid #ffb700
