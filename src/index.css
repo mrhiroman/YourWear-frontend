@@ -28,5 +28,4 @@ code {
 
 *::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #143A79 0%, #143A79 100%);
-  border-radius: 10px;
 }
