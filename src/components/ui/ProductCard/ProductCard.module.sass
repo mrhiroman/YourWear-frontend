@@ -16,9 +16,22 @@
     border-radius: 24px
     overflow: hidden
     transition: all 0.2s ease
+    position: relative
 
     &:hover
+        scale: 1.05
         box-shadow: 0px 40px 100px rgba(20, 58, 121, 0.24)
+
+        .overlay
+            display: flex
+            height: 270px
+
+            div
+                height: auto
+                display: block
+
+            .circleButton
+                height: 48px
 
     .image
         background-color: #F2F2F2
@@ -36,3 +49,37 @@
             @include barlow-600
             font-size: 16px
             line-height: 24px
+
+.overlay
+    z-index: 5
+    background: #143b7962
+    position: absolute
+    top: 0
+    left: 0
+    width: 390px
+    height: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 8px
+    transition: all 0.2s ease
+
+    div
+        display: none
+
+    .circleButton
+        width: 48px
+        height: 0
+        background: #FFFFFF
+        border-radius: 24px
+        cursor: pointer
+        padding: 12px
+        box-sizing: border-box
+        transition: all 0.2s ease
+
+        &:hover
+            background: #898181
+
+        img
+            width: 24px
+            height: 24px
