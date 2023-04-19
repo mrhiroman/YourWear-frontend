@@ -4,6 +4,7 @@ import { Button, ButtonType } from 'components/ui/Button'
 
 import MainPicture from 'assets/img/pages/main/MainBannerPicture.png'
 import CustomizerPicture from 'assets/img/pages/main/CustomizerPicture.png'
+import Testimonial from 'assets/img/pages/main/Testimonial.png'
 
 import HeartIcon from 'assets/img/pages/main/icons/Heart.svg'
 import FlashIcon from 'assets/img/pages/main/icons/Flash.svg'
@@ -101,7 +102,21 @@ export const MainPage = () => {
             </div>
         </div>
         <div className={styles.bannerTestimonials}>
-
+            <div className={styles.info}>
+                <div className={styles.caption}>
+                    Read What Our Clients Say
+                </div>
+                <div className={styles.divisor}></div>
+            </div>
+            <div className={styles.testimonial}>
+                <div className={styles.photo}>
+                    <img src={Testimonial} alt='' />
+                </div>
+                <div className={styles.man}>
+                    <div className={styles.name}>John Doe</div>
+                    <div className={styles.review}>This was my first experience ordering a custom tailored suit. The staff was super helpful and professional and I got what I wanted for my upcoming wedding.</div>
+                </div>
+            </div>
         </div>
     </div>
   )
