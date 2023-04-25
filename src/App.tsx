@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import { Header } from './components/layout/Header';
 import { Footer } from 'components/layout/Footer';
 import { MainPage } from 'pages/MainPage';
+import { CustomizerPage } from 'pages/CustomizerPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='' element={<MainPage />}/>
+        <Route path='/customizer' element={<CustomizerPage />}/>
       </Routes>
       <Footer />
     </div>

@@ -1,6 +1,6 @@
-import React from 'react'
+import {useState} from 'react'
 import styles from './Header.module.sass'
-import { NavLink } from 'react-router-dom'
+import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import City from 'assets/img/header/Map Pin.svg'
 import Email from 'assets/img/header/Email.svg'
@@ -14,10 +14,25 @@ import Arrow from 'assets/img/header/Arrow.svg'
 import Logo from 'assets/img/Logo.svg'
 import { Button, ButtonType } from 'components/ui/Button'
 
+enum headerTheme {
+    Basic = 'basic',
+    Customizer = 'blue'
+}
+
 
 export const Header = () => {
-  return (
-    <div className={styles.layout}>
+    const navigate = useNavigate()
+    const location = useLocation()
+    const [currentTheme, setCurrentTheme] = useState(headerTheme.Basic)
+
+    if(location.pathname.includes('/customizer') && currentTheme !== headerTheme.Customizer){
+        setCurrentTheme(headerTheme.Customizer)
+    } else if(!location.pathname.includes('/customizer') && currentTheme !== headerTheme.Basic){
+        setCurrentTheme(headerTheme.Basic)
+    }
+
+    return (
+    <div className={`${styles.layout} ${currentTheme === headerTheme.Customizer ? styles.blue : ''}`}>
         <div className={styles.headerUpper}>
             <div className={styles.upperLeft}>
                 <div className={styles.elementUpper}>
@@ -41,16 +56,16 @@ export const Header = () => {
         </div>
         <div className={styles.headerMain}>
             <div className={styles.headerMainLeft}>
-                <div className={styles.logoContainer}>
+                <div className={styles.logoContainer} onClick={() => navigate('')}>
                     <div className={styles.logo}>
                         <img src={Logo} alt='logo' />
                     </div>
-                    <div>YourWear</div>
+                    <div className={styles.logoText}>YourWear {currentTheme === headerTheme.Customizer ? <span className={styles.yellow}>Create</span> : ''}</div>
                 </div>
                 <nav className={styles.navigation}>
                     <NavLink to="">Home</NavLink>
-                    <NavLink to="">Shop</NavLink>
-                    <NavLink to="">Pages</NavLink>
+                    <NavLink to="/shop">Shop</NavLink>
+                    <NavLink to="/customizer">Customizer</NavLink>
                     <NavLink to="">Elements</NavLink>
                 </nav>
             </div>
