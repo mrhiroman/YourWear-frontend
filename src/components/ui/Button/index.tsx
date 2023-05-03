@@ -7,9 +7,9 @@ export enum ButtonType {
     Yellow = 'Yellow'
 }
 
-export const Button = (props: {type: ButtonType, text: string}) => {
+export const Button = (props: {type: ButtonType, text: string, onClick?: () => void}) => {
   return (
-    <div className={`${styles.button} ${styles[props.type]}`}>
+    <div onClick={props.onClick} className={`${styles.button} ${styles[props.type]}`}>
         {props.text}
     </div>
   )

@@ -5,18 +5,22 @@ import { Header } from './components/layout/Header';
 import { Footer } from 'components/layout/Footer';
 import { MainPage } from 'pages/MainPage';
 import { CustomizerPage } from 'pages/CustomizerPage';
+import { store } from 'redux/store';
+import { Provider } from 'react-redux'
 
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path='' element={<MainPage />}/>
-        <Route path='/customizer' element={<CustomizerPage />}/>
-      </Routes>
-      <Footer />
-    </div>
+      <Provider store={store}>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path='' element={<MainPage />}/>
+            <Route path='/customizer' element={<CustomizerPage />}/>
+          </Routes>
+          <Footer />
+        </div>
+      </Provider>
     </BrowserRouter>
   );
 }

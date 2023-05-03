@@ -13,10 +13,22 @@ import Profile from 'assets/img/header/User.svg'
 import Arrow from 'assets/img/header/Arrow.svg'
 import Logo from 'assets/img/Logo.svg'
 import { Button, ButtonType } from 'components/ui/Button'
+import { OpenAPI, UserService } from 'generated/api'
 
 enum headerTheme {
     Basic = 'basic',
     Customizer = 'blue'
+}
+
+const onLoginClick = () => {
+    UserService.postApiLogin({
+        email: 'govndfo@zhopa.ru',
+        password: '880055535365'
+    })
+    .then(response => {
+        OpenAPI.TOKEN = response.access_token
+        console.log(response.access_token)
+    })
 }
 
 
@@ -80,7 +92,7 @@ export const Header = () => {
                 </div>
                 <div className={styles.buttonsFull}>
                     <Button type={ButtonType.Blue} text="Register" />
-                    <Button type={ButtonType.White} text="Login" />
+                    <Button type={ButtonType.White} text="Login" onClick={onLoginClick}/>
                 </div>
             </div>
         </div>
