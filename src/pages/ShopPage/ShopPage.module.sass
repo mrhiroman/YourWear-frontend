@@ -1,0 +1,90 @@
+@mixin montserrat-500
+    font-family: 'Montserrat'
+    font-weight: 500
+
+@mixin barlow-400
+    font-family: 'Barlow'
+    font-weight: 400
+
+.container
+    display: flex
+    flex-direction: column
+    gap: 238px
+
+    .banner
+        &Suits
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+
+            .content
+                width: 570px
+                height: 230px
+                margin-top: 253px
+                margin-left: 18vw
+                display: flex
+                flex-direction: column
+                gap: 24px
+
+                .title
+                    font-size: 48px
+                    font-weight: 60px
+                    @include montserrat-500
+
+                .info
+                    font-size: 16px
+                    line-height: 24px
+                    text-align: left
+                    @include barlow-400
+
+                .buttons
+                    display: flex
+                    gap: 8px
+
+            .poster
+                height: 800px
+                width: 945px
+                border-radius: 10px
+
+        &Products
+            display: flex
+            flex-direction: column
+            gap: 54px
+            align-items: center
+
+            .navigation
+                display: flex
+                justify-content: space-between
+                width: 1170px
+                align-items: center
+
+                &Bar
+                    display: flex
+                    gap: 40px
+
+                    a
+                        font-size: 28px
+                        line-height: 36px
+                        letter-spacing: 0px
+                        text-align: left
+                        text-decoration: none
+                        color: rgba(130, 130, 130, 1)
+
+                        @include montserrat-500
+
+                    .active
+                        color: rgba(20, 58, 121, 1)
+
+            .products
+                display: flex
+                flex-direction: row
+                justify-content: center
+                flex-wrap: wrap
+                gap: 30px
+                max-width: 1300px
+                margin-bottom: 100px
+
+.line
+    width: 200px
+    height: 2px
+    background: black

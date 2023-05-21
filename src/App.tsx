@@ -7,6 +7,7 @@ import { MainPage } from 'pages/MainPage';
 import { CustomizerPage } from 'pages/CustomizerPage';
 import { store } from 'redux/store';
 import { Provider } from 'react-redux'
+import { ShopPage } from 'pages/ShopPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path='' element={<MainPage />}/>
             <Route path='/customizer' element={<CustomizerPage />}/>
+            <Route path='/shop' element={<ShopPage />}/>
           </Routes>
           <Footer />
         </div>
