@@ -1,0 +1,30 @@
+$red: rgb(219, 68, 55)
+$red-hover: rgb(248, 95, 24)
+
+@mixin barlow-600
+    font-family: 'Barlow', sans-serif
+    font-weight: 600
+
+.button
+    padding: 12px 20px
+    border-radius: 80px
+    @include barlow-600
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 16px
+    line-height: 24px
+    cursor: pointer
+    transition: all 0.2s ease
+    width: 374px
+    display: flex
+    justify-content: center
+    gap: 8px
+
+.Red
+    color: white
+    background: $red
+    border: 1px solid $red
+
+    &:hover
+        border: 1px solid $red-hover
+        background: $red-hover

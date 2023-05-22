@@ -1,0 +1,95 @@
+@mixin montserrat-500
+    font-family: 'Montserrat'
+    font-weight: 500
+
+@mixin barlow-400
+    font-family: 'Barlow'
+    font-weight: 400
+
+$light-black: rgb(51,51,51)
+
+.container
+    margin-left: 23vw
+
+    .auth_buttons
+        margin-top: 80px
+        display: flex
+    //  justify-content: space-around | for other buttons
+        width: 1170px
+
+    .choicebar
+        display: flex
+        align-items: center
+        gap: 24px
+        margin-top: 40px
+
+        .line
+            width: 550px
+            height: 1px
+            background: rgba(224, 224, 224, 1)
+
+        span
+            color: rgb(208, 208, 208)
+            @include barlow-400
+
+    .blocks
+        display: flex
+        gap: 80px
+
+        .login, .registration
+            display: flex
+            flex-direction: column
+            gap: 24px
+            margin-top: 51px
+            width: 504px
+            height: 568px
+
+            .title
+                display: flex
+                flex-direction: column
+                gap: 8px
+                width: 504px
+
+                &Big
+                    font-size: 28px
+                    @include montserrat-500
+
+                &Small
+                    color: rgb(79,79,79)
+                    font-size: 16px
+                    @include barlow-400
+
+            .forms
+                display: flex
+                flex-direction: column
+                gap: 24px
+
+                label
+                    font-size: 12px
+                    color: $light-black
+                    @include montserrat-500
+
+                    input
+                        width: 504px
+                        height: 36px
+                        border: 1px rgb(224,224,224) solid
+                        border-radius: 12px
+                        padding: 5px
+
+                .validate
+                    color: rgb(219, 68, 55)
+
+            p
+                @include montserrat-500
+                font-size: 12px
+
+            .buttons
+                margin-top: 20px
+                display: flex
+                flex-direction: row
+
+        .line
+            height: 500px
+            margin-top: 24px
+            width: 1px
+            background: rgba(224, 224, 224, 1)
