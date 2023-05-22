@@ -9,13 +9,15 @@
 $light-black: rgb(51,51,51)
 
 .container
-    margin-left: 23vw
+    display: flex
+    flex-direction: column
+    align-items: center
 
     .auth_buttons
         margin-top: 80px
         display: flex
     //  justify-content: space-around | for other buttons
-        width: 1170px
+    //  width: 1170px
 
     .choicebar
         display: flex
@@ -27,6 +29,10 @@ $light-black: rgb(51,51,51)
             width: 550px
             height: 1px
             background: rgba(224, 224, 224, 1)
+            transition: all ease 0.6s
+
+            @media screen and (max-width: 1500px)
+                width: 300px
 
         span
             color: rgb(208, 208, 208)
@@ -34,7 +40,12 @@ $light-black: rgb(51,51,51)
 
     .blocks
         display: flex
+        justify-content: center
         gap: 80px
+
+        @media screen and (max-width: 1500px)
+            flex-direction: column
+            gap: 30px
 
         .login, .registration
             display: flex
@@ -93,3 +104,10 @@ $light-black: rgb(51,51,51)
             margin-top: 24px
             width: 1px
             background: rgba(224, 224, 224, 1)
+
+            @media screen and (max-width: 1500px)
+                display: none
+
+        .login
+            @media screen and (max-width: 1500px)
+                height: 300px
