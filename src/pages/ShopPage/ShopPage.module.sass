@@ -76,11 +76,11 @@
                         color: rgba(20, 58, 121, 1)
 
             .products
-                display: flex
-                flex-direction: row
-                justify-content: center
-                flex-wrap: wrap
-                gap: 30px
+                display: grid
+                grid-template-columns: repeat(3, 1fr)
+                grid-template-rows: repeat(2, 1fr)
+                grid-column-gap: 30px
+                grid-row-gap: 30px
                 max-width: 1300px
                 margin-bottom: 100px
 

@@ -15,9 +15,6 @@ const MockData: Array<Product> = [
     {name: 'test', price: 500},
     {name: 'test', price: 500},
     {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
 ]
 
 export const ShopPage = () => {
