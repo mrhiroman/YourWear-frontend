@@ -9,6 +9,7 @@ import { store } from 'redux/store';
 import { Provider } from 'react-redux'
 import { ShopPage } from 'pages/ShopPage';
 import { RegistrationPage } from 'pages/RegistrationPage';
+import { CustomerPage } from 'pages/CustomerPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/customizer' element={<CustomizerPage />}/>
             <Route path='/shop' element={<ShopPage />}/>
             <Route path='/registration' element={<RegistrationPage />}/>
+            <Route path='/profile' element={<CustomerPage />}/>
           </Routes>
           <Footer />
         </div>

@@ -1,0 +1,70 @@
+@mixin montserrat-500
+    font-family: 'Montserrat'
+    font-weight: 500
+
+@mixin barlow-400
+    font-family: 'Barlow'
+    font-weight: 400
+
+.container
+    display: flex
+    margin: 0 auto
+    flex-direction: column
+    align-items: center
+
+    .title
+        font-size: 30px
+        @include montserrat-500
+
+    .info
+        padding: 10px
+        display: flex
+        gap: 15px
+
+        &Name
+            font-size: 24px
+
+    .line
+        margin-top: 20px
+        width: 1250px
+        height: 2px
+        background: rgba(224, 224, 224, 1)
+        transition: all ease 0.6s
+
+        @media (max-width: 1300px)
+            width: 400px
+
+    .products
+        padding: 30px
+
+        .navigation
+            display: flex
+            justify-content: space-between
+            width: 400px
+            align-items: center
+            @media (max-width: 1300px)
+                margin: 0 auto
+
+            a
+                font-size: 28px
+                line-height: 36px
+                letter-spacing: 0px
+                text-align: left
+                text-decoration: none
+                color: rgba(130, 130, 130, 1)
+
+                @include montserrat-500
+
+                .active
+                    color: rgba(20, 58, 121, 1)
+
+        &List
+            margin-top: 30px
+            display: grid
+            grid-template-columns: repeat(3, 1fr)
+            grid-column-gap: 25px
+            grid-row-gap: 25px
+            @media (max-width: 1300px)
+                grid-template-columns: repeat(2, 1fr)
+            @media (max-width: 850px)
+                grid-template-columns: repeat(1, 1fr)
