@@ -11,13 +11,22 @@ import { request as __request } from '../core/request';
 export class PublishedWearService {
 
     /**
+     * @param page 
+     * @param limit 
      * @returns WearModel Success
      * @throws ApiError
      */
-    public static getApiWears(): CancelablePromise<Array<WearModel>> {
+    public static getApiWears(
+page: number = -1,
+limit: number = -1,
+): CancelablePromise<Array<WearModel>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/wears',
+            query: {
+                'page': page,
+                'limit': limit,
+            },
         });
     }
 

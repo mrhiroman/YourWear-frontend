@@ -22,12 +22,12 @@ enum headerTheme {
 
 const onLoginClick = () => {
     UserService.postApiLogin({
-        email: 'govndfo@zhopa.ru',
-        password: '880055535365'
+        email: 'sreutin@mail.ru',
+        password: '21042003sr'
     })
     .then(response => {
-        OpenAPI.TOKEN = response.access_token
-        console.log(response.access_token)
+        OpenAPI.TOKEN = response.access_token   
+        localStorage.setItem("token", response.access_token)
     })
 }
 

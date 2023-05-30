@@ -11,13 +11,22 @@ import { request as __request } from '../core/request';
 export class OrderService {
 
     /**
+     * @param page 
+     * @param limit 
      * @returns OrderModel Success
      * @throws ApiError
      */
-    public static getApiOrders(): CancelablePromise<Array<OrderModel>> {
+    public static getApiOrders(
+page: number = -1,
+limit: number = -1,
+): CancelablePromise<Array<OrderModel>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/orders',
+            query: {
+                'page': page,
+                'limit': limit,
+            },
         });
     }
 

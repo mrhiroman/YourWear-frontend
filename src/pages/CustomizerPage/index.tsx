@@ -5,8 +5,6 @@ import { RootState, useAppDispatch } from 'redux/store'
 import { Button, ButtonType } from 'components/ui/Button'
 import { setDesignState } from 'redux/customizer/slice'
 
-import DefaultShirt from 'assets/img/mocks/DefaultShirt.png'
-
 import './EditorFix.sass'
 
 import FilerobotImageEditor, {

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './ProductCard.module.sass'
 
-import DefaultShirt from 'assets/img/mocks/DefaultShirt.png'
+import BlackTShirt from 'assets/img/mocks/BlackTShirt.png'
 
 import HeartIcon from 'assets/img/pages/main/icons/Heart.svg'
 import BagIcon from 'assets/img/pages/main/icons/Bag.svg'
@@ -22,7 +22,7 @@ export type Product = {
 export const ProductCard = (props: {product: Product}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const img = props.product.imageUrl !== undefined ? props.product.imageUrl : DefaultShirt
+  const img = props.product.imageUrl !== undefined ? props.product.imageUrl : BlackTShirt
 
   const onCustomizeClick = () => {
       dispatch(setItem({baseImage: img, cost: props.product.price, type: ClothType.HOODIE})) //fix ClothType
