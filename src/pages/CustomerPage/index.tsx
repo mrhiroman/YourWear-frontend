@@ -29,10 +29,12 @@ export const CustomerPage = () => {
   }
 
   const handleLogout = () => {
-    dispatch(setUser({}))
-    localStorage.removeItem("token")
-    navigate("/")
-    window.scrollTo(0,0)
+    if(window.confirm("Really logout?")){
+      dispatch(setUser({}))
+      localStorage.removeItem("token")
+      navigate("/")
+      window.scrollTo(0,0)
+    }
   }
 
   return (
