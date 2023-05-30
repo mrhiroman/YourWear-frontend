@@ -5,16 +5,13 @@ import { Formik } from 'formik'
 import styles from './RegistrationPage.module.sass'
 
 import { Button, ButtonType } from 'components/ui/Button'
-import { Link } from 'react-router-dom'
 import { AuthButton, AuthButtonType } from './AuthButtons'
-
-import Google from '../../assets/img/pages/registration/Google.png'
 
 export const RegistrationPage = () => {
   return (
     <div className={styles.container}>
         <div className={styles.auth_buttons}>
-            <AuthButton type={AuthButtonType.Red} text='with google' />
+            <AuthButton type={AuthButtonType.Red} text='sign in with google' />
         </div>
         <div className={styles.choicebar}>
             <div className={styles.line}></div>

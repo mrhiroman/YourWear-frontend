@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './AuthButtons.module.sass'
 
-import Google from '../../../assets/img/pages/registration/Google.png'
+import Google from 'assets/img/pages/registration/Google.png'
 
 export enum AuthButtonType {
     Red = 'Red'

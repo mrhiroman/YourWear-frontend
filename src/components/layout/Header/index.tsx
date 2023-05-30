@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import styles from './Header.module.sass'
-import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import City from 'assets/img/header/Map Pin.svg'
 import Email from 'assets/img/header/Email.svg'

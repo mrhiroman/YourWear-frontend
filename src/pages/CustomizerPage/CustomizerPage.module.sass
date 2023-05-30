@@ -1,17 +1,7 @@
-@mixin barlow-400
-    font-family: 'Barlow', sans-serif
-    font-weight: 400
-
-@mixin barlow-600
-    font-family: 'Barlow', sans-serif
-    font-weight: 600
-
-@mixin montserrat
-    font-family: 'Montserrat', sans-serif
-    font-weight: 500
+@use "src/sass/typography"
 
 .layout
-    @include barlow-400
+    @include typography.barlow-400
     height: 600px
     width: 100%
     justify-content: center
@@ -22,10 +12,10 @@
     background: #ffffff
 
 .caption
-    @include montserrat
+    @include typography.montserrat
 
 .smallText
-    @include barlow-400
+    @include typography.barlow-400
     font-size: 20px
     margin-bottom: 10px
 

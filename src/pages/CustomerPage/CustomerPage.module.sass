@@ -1,10 +1,4 @@
-@mixin montserrat-500
-    font-family: 'Montserrat'
-    font-weight: 500
-
-@mixin barlow-400
-    font-family: 'Barlow'
-    font-weight: 400
+@use "src/sass/typography"
 
 .container
     display: flex
@@ -14,7 +8,7 @@
 
     .title
         font-size: 30px
-        @include montserrat-500
+        @include typography.montserrat
 
     .info
         padding: 10px
@@ -53,7 +47,7 @@
                 text-decoration: none
                 color: rgba(130, 130, 130, 1)
 
-                @include montserrat-500
+                @include typography.montserrat
 
                 .active
                     color: rgba(20, 58, 121, 1)

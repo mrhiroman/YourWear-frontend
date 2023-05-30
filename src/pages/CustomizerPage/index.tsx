@@ -12,8 +12,7 @@ import FilerobotImageEditor, {
   TOOLS,
 } from 'react-filerobot-image-editor';
 
-import { ClothType, OrderService } from 'generated/api'
-import { Root } from 'react-dom/client'
+import { OrderService } from 'generated/api'
 import { ClothItem } from 'types/types'
 
 const saveImage = (editedImageObject: any, designState: any, item?: ClothItem) => {
