@@ -13,34 +13,32 @@ import Profile from 'assets/img/header/User.svg'
 import Arrow from 'assets/img/header/Arrow.svg'
 import Logo from 'assets/img/Logo.svg'
 import { Button, ButtonType } from 'components/ui/Button'
-import { OpenAPI, UserService } from 'generated/api'
+import { useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
 
 enum headerTheme {
     Basic = 'basic',
     Customizer = 'blue'
 }
 
-const onLoginClick = () => {
-    UserService.postApiLogin({
-        email: 'sreutin@mail.ru',
-        password: '21042003sr'
-    })
-    .then(response => {
-        OpenAPI.TOKEN = response.access_token   
-        localStorage.setItem("token", response.access_token)
-    })
-}
-
-
 export const Header = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [currentTheme, setCurrentTheme] = useState(headerTheme.Basic)
+    const user = useSelector((state: RootState) => state.user.user)
 
     if(location.pathname.includes('/customizer') && currentTheme !== headerTheme.Customizer){
         setCurrentTheme(headerTheme.Customizer)
     } else if(!location.pathname.includes('/customizer') && currentTheme !== headerTheme.Basic){
         setCurrentTheme(headerTheme.Basic)
+    }
+
+    const onLoginClick = () => {
+        navigate("/registration")
+    }
+
+    const onProfileClick = () => {
+        navigate("/profile")
     }
 
     return (
@@ -89,11 +87,21 @@ export const Header = () => {
                     <div className={styles.icon}>
                         <img src={Cart} alt='cart' />
                     </div>
+                    {user.email && 
+                        <div className={styles.profileButton} onClick={onProfileClick}>
+                            <div className={styles.icon}>
+                                <img src={Profile} alt='profile' />
+                            </div>
+                            <div className={styles.name}> {user.name}</div>
+                        </div>
+                    }
                 </div>
+                {!user.email &&
                 <div className={styles.buttonsFull}>
-                    <Button type={ButtonType.Blue} text="Register" />
+                    <Button type={ButtonType.Blue} text="Register" onClick={onLoginClick} />
                     <Button type={ButtonType.White} text="Login" onClick={onLoginClick}/>
                 </div>
+                }
             </div>
         </div>
     </div>

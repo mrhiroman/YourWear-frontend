@@ -8,6 +8,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AddOrderModel } from './models/AddOrderModel';
 export type { AddWearModel } from './models/AddWearModel';
+export type { AuthRequestResponse } from './models/AuthRequestResponse';
 export { ClothType } from './models/ClothType';
 export type { LoginUserModel } from './models/LoginUserModel';
 export type { OrderModel } from './models/OrderModel';

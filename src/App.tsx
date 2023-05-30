@@ -5,37 +5,39 @@ import { Header } from './components/layout/Header';
 import { Footer } from 'components/layout/Footer';
 import { MainPage } from 'pages/MainPage';
 import { CustomizerPage } from 'pages/CustomizerPage';
-import { store } from 'redux/store';
-import { Provider } from 'react-redux'
+import { useAppDispatch } from 'redux/store';
 import { ShopPage } from 'pages/ShopPage';
 import { RegistrationPage } from 'pages/RegistrationPage';
 import { CustomerPage } from 'pages/CustomerPage';
-import { OpenAPI, OrderService, UserService } from 'generated/api';
+import { OpenAPI, UserService } from 'generated/api';
 
-const validate = (token: string) => {
-  console.log(token)
-  OpenAPI.TOKEN = token
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import { setUser } from 'redux/user/slice';
 
-  OrderService.getApiOrders() //Todo make a special metod to check login
-  .then(resp => {
-    // Todo user in state, signin = true
-  })
-  .catch(err => {
-    OpenAPI.TOKEN = ''
-  })
-
-}
 
 function App() {
+  const dispatch = useAppDispatch()
+  const validate = (token: string) => {
+    OpenAPI.TOKEN = token
+  
+    UserService.getApiInfo() //Todo make a special metod to check login
+    .then(resp => {
+      dispatch(setUser(resp))
+    })
+    .catch(err => {
+      OpenAPI.TOKEN = ''
+    })
+  
+  }
+
   OpenAPI.BASE = 'https://localhost:7041'
   
   const token = localStorage.getItem("token")
   token && validate(token)
   
-
   return (
     <BrowserRouter>
-      <Provider store={store}>
+        <GoogleOAuthProvider clientId='611860978924-1ktei1s71qsseenjboeubgdnmq8oa2v0.apps.googleusercontent.com'>
         <div className="App">
           <Header />
           <Routes>
@@ -47,7 +49,7 @@ function App() {
           </Routes>
           <Footer />
         </div>
-      </Provider>
+        </GoogleOAuthProvider>
     </BrowserRouter>
   );
 }

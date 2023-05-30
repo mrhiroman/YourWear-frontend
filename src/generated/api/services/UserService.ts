@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AuthRequestResponse } from '../models/AuthRequestResponse';
 import type { LoginUserModel } from '../models/LoginUserModel';
 import type { RegisterUserModel } from '../models/RegisterUserModel';
 import type { UserInfoModel } from '../models/UserInfoModel';
@@ -13,12 +14,12 @@ export class UserService {
 
     /**
      * @param requestBody 
-     * @returns any Success
+     * @returns AuthRequestResponse Success
      * @throws ApiError
      */
     public static postApiLogin(
 requestBody?: LoginUserModel,
-): CancelablePromise<any> {
+): CancelablePromise<AuthRequestResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/login',
@@ -45,12 +46,12 @@ requestBody?: RegisterUserModel,
 
     /**
      * @param requestBody 
-     * @returns any Success
+     * @returns AuthRequestResponse Success
      * @throws ApiError
      */
     public static postApiRefresh(
 requestBody?: string,
-): CancelablePromise<any> {
+): CancelablePromise<AuthRequestResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/refresh',
@@ -67,6 +68,22 @@ requestBody?: string,
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/info',
+        });
+    }
+
+    /**
+     * @param requestBody 
+     * @returns AuthRequestResponse Success
+     * @throws ApiError
+     */
+    public static postApiGoogleLogin(
+requestBody?: string,
+): CancelablePromise<AuthRequestResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/google_login',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
