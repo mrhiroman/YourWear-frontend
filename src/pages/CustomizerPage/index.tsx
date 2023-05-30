@@ -14,13 +14,14 @@ import FilerobotImageEditor, {
 
 import { OrderService } from 'generated/api'
 import { ClothItem } from 'types/types'
+import { useNavigate } from 'react-router-dom'
 
 const saveImage = (editedImageObject: any, designState: any, item?: ClothItem) => {
   OrderService.postApiOrders({
     clothType: item?.type, //fix with actual Item
     cost: item?.cost,
     editableObject: JSON.stringify(designState),
-    imageUrl: designState.imgSrc
+    imageUrl: editedImageObject.imageBase64
   })
 }
 
@@ -30,9 +31,10 @@ export const CustomizerPage = () => {
   const itemToCustomize = useSelector((state: RootState) => state.customizer.itemToCustomize)
   const designState = useSelector((state: RootState) => state.customizer.designState)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const LoadImageFromBackend = () => {
+  /*const LoadImageFromBackend = () => {
     OrderService.getApiOrdersGetobject(10)
     .then(response => {
         const state = JSON.parse(response.value)
@@ -40,10 +42,14 @@ export const CustomizerPage = () => {
         dispatch(setDesignState(state))
     })
     .catch(err => console.log(err))
-  }
+  }*/
   
-  if(!designState){
+  /*if(!designState){
     LoadImageFromBackend()
+  }*/
+
+  const shopClick = () => {
+    navigate("/shop")
   }
 
   if(!(itemToCustomize || designState)){
@@ -51,7 +57,7 @@ export const CustomizerPage = () => {
       <div className={styles.layout}>
         <h1 className={styles.caption}>Hey!</h1>
         <div className={styles.smallText}>You have not selected any item to customize...</div>
-        <Button type={ButtonType.Blue} text='Go to Shop' />
+        <Button onClick={shopClick} type={ButtonType.Blue} text='Go to Shop' />
       </div>
     )
   }
@@ -69,19 +75,20 @@ export const CustomizerPage = () => {
   return (
     <div className={`${styles.layout} editorFix`}>
       <FilerobotImageEditor
+          defaultSavedImageQuality={0.3}
           disableZooming={true}
           savingPixelRatio={4}
           previewPixelRatio={window.devicePixelRatio}
           // @ts-ignore
           source={itemToCustomize ? itemToCustomize.baseImage : designState?.imgSrc}
           onBeforeSave={(editedImageObject) => {
-            console.log(editedImageObject)
+
             return false}
           }
           onSave={(editedImageObject, designState) => {
             console.log(editedImageObject, designState)
             saveImage(editedImageObject, designState, itemToCustomize)
-            //(editedImageObject.imageBase64, 'img.png')
+            console.log(editedImageObject.imageBase64)
             }
           }
           onClose={() => {}}

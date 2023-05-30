@@ -58,11 +58,11 @@ export const MainPage = () => {
         <div className={styles.bannerShop}>
             <div className={styles.info}>
                 <div className={styles.caption}>
-                    New Arrivals
+                    New Designs
                 </div>
                 <div className={styles.divisor}></div>
                 <div className={styles.description}>
-                    Check out our exclusive selection of this season’s new arrivals, made with world’s highest quality fabric 
+                    Check out the new cloth designs, made with love by our users!
                 </div> 
                 <div className={styles.buttons}>
                     <Button type={ButtonType.Yellow} text='Browse all' />
@@ -78,11 +78,11 @@ export const MainPage = () => {
             </div>
             <div className={styles.info}>
                 <div className={styles.caption}>
-                    Custom Shirts
+                    Custom Clothing
                 </div>
                 <div className={styles.divisor}></div>
                 <div className={styles.description}>
-                Stay ahead of the competitive tailoring business using our shirt customization tool. It allows your customers to design their shirts themselves with ease
+                Stay ahead of the competitive tailoring business using our shirt customization tool. It allows you to design your shirts with ease!
                 </div> 
                 <div className={styles.buttons}>
                     <Button type={ButtonType.Yellow} text='Browse all' />

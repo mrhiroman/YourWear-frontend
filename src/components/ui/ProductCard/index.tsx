@@ -9,7 +9,7 @@ import { Button, ButtonType } from '../Button'
 import { setItem } from 'redux/customizer/slice'
 import { useAppDispatch } from 'redux/store'
 import { useNavigate } from 'react-router-dom'
-import { ClothType } from 'generated/api'
+import { ClothType, OrderModel, WearModel } from 'generated/api'
 
 //add currency from global state(?)
 export type Product = {
@@ -19,20 +19,20 @@ export type Product = {
     isPromo?: boolean
 }
 
-export const ProductCard = (props: {product: Product}) => {
+export const ProductCard = (props: {product: OrderModel | WearModel}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const img = props.product.imageUrl !== undefined ? props.product.imageUrl : BlackTShirt
 
   const onCustomizeClick = () => {
-      dispatch(setItem({baseImage: img, cost: props.product.price, type: ClothType.HOODIE})) //fix ClothType
+      dispatch(setItem({baseImage: img as string, cost: 100, type: props.product.clothType as ClothType})) //fix ClothType
       navigate('/customizer')
       //window.scrollTo(0,0);
   }
   return (
     <div className={styles.card}>
         <div className={styles.image}>
-            <img src={img} alt='product' />
+            <img src={img as string} alt='product' />
             <div className={styles.overlay}>
               <div className={styles.circleButton}>
                 <img src={BagIcon} alt='buy' />
@@ -44,8 +44,8 @@ export const ProductCard = (props: {product: Product}) => {
             </div>
         </div>
         <div className={styles.cardInfo}>
-            <div className={styles.name}>{props.product.name}</div>
-            <div className={styles.price}>${props.product.price}</div>
+            <div className={styles.name}>{props.product.clothType}</div>
+            <div className={styles.price}>${10}</div>
         </div>
     </div>
   )

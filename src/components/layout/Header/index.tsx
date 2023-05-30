@@ -76,7 +76,6 @@ export const Header = () => {
                     <NavLink to="">Home</NavLink>
                     <NavLink to="/shop">Shop</NavLink>
                     <NavLink to="/customizer">Customizer</NavLink>
-                    <NavLink to="">Elements</NavLink>
                 </nav>
             </div>
             <div className={styles.buttons}>

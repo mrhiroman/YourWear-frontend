@@ -22,7 +22,7 @@ export const ShopPage = () => {
     <div className={styles.container}>
       <div className={styles.bannerSuits}>
         <div className={styles.content}>
-            <span className={styles.title}>Premium Suits</span>
+            <span className={styles.title}>Premium Quality</span>
             <div className={styles.line}></div>
             <span className={styles.info}>Our suits are crafted in Italy and France by latest technology
             using some of the world's finest and highest quality fabrics</span>
@@ -36,11 +36,11 @@ export const ShopPage = () => {
     <div className={styles.bannerProducts}>
         <div className={styles.navigation}>
         <nav className={styles.navigationBar}>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Popular</NavLink>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>New Arrivals</NavLink>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Trending</NavLink>
+            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>All</NavLink>
+            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Fresh Start</NavLink>
+            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Designs from Users</NavLink>
         </nav>
-        <Button type={ButtonType.White} text='Browse more' />
+        <Button type={ButtonType.White} text='Pagination' />
         </div>
         <div className={styles.products}>
             {MockData.map((item, i) => <ProductCard key={i} product={item}/>)}

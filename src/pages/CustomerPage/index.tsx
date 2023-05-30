@@ -5,9 +5,11 @@ import { Product, ProductCard } from 'components/ui/ProductCard'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from 'redux/store'
-import { setUser } from 'redux/user/slice'
+import { setOrders, setUser } from 'redux/user/slice'
 
 import Logout from 'assets/img/pages/profile/Logout.svg'
+import { OrderService, OrderStatus } from 'generated/api'
+import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 
 const MockData: Array<Product> = [
     {name: 'test', price: 500},
@@ -20,7 +22,9 @@ const MockData: Array<Product> = [
 
 export const CustomerPage = () => {
   const [selectedCategory, setCategory] = React.useState(0)
+  const [isLoading, setIsLoading] = React.useState(false)
   const user = useSelector((state: RootState) => state.user.user)
+  const orders = useSelector((state: RootState) => state.user.orders)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -37,9 +41,19 @@ export const CustomerPage = () => {
     }
   }
 
+  React.useEffect(() => {
+    setIsLoading(true)
+    OrderService.getApiOrders()
+    .then(resp => {
+      dispatch(setOrders(resp))
+      console.log(resp)
+      setIsLoading(false)
+    })
+  }, [user])
+
   return (
     <div className={styles.container}>
-      <span className={styles.title}>Information</span>  
+      <span className={styles.title}>User Area</span>  
       <div className={styles.info}>
         <span className={styles.infoName}>Welcome, {user.name}</span>
         <div onClick={handleLogout} className={styles.logoutIcon}>
@@ -51,11 +65,14 @@ export const CustomerPage = () => {
             <nav className={styles.navigation}>
                 <div onClick={() => selectCategory(0)} className={ selectedCategory === 0 ? styles.active : ''}>All</div>
                 <div onClick={() => selectCategory(1)} className={ selectedCategory === 1 ? styles.active : ''}>Drafts</div>
-                <div onClick={() => selectCategory(2)} className={ selectedCategory === 2 ? styles.active : ''}>Designs</div>
-                <div onClick={() => selectCategory(3)} className={ selectedCategory === 3 ? styles.active : ''}>Orders</div>
+                <div onClick={() => selectCategory(2)} className={ selectedCategory === 2 ? styles.active : ''}>Ordered</div>
+                <div onClick={() => selectCategory(3)} className={ selectedCategory === 3 ? styles.active : ''}>Published</div>
             </nav>
             <div className={styles.productsList}>
-                {MockData.map((item, i) => <ProductCard key={i} product={item}/>)}
+                {selectedCategory === 0 && (!isLoading ? orders.map((item, i) => <ProductCard key={i} product={item}/>) : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />))}
+                {selectedCategory === 1 && orders.filter(x => x.orderStatus === OrderStatus.DRAFT).map((item, i) => <ProductCard key={i} product={item}/>)}
+                {selectedCategory === 2 && orders.filter(x => x.orderStatus === OrderStatus.PLACED).map((item, i) => <ProductCard key={i} product={item}/>)}
+                {selectedCategory === 3 && user.publishedWears?.map((item, i) => <ProductCard key={i} product={item}/>)}
             </div>
         </div>
       </div>
