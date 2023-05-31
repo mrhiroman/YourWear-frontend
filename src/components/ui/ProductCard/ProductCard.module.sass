@@ -1,10 +1,4 @@
-@mixin barlow-600
-    font-family: 'Barlow', sans-serif
-    font-weight: 600
-
-@mixin montserrat
-    font-family: 'Montserrat', sans-serif
-    font-weight: 500
+@use "src/sass/typography"
 
 .card
     display: flex
@@ -46,12 +40,17 @@
         padding: 24px
 
         .name
-            @include montserrat
+            @include typography.montserrat
             font-size: 20px
             line-height: 28px
 
+        .status
+            @include typography.barlow-400
+            font-size: 18px
+            line-height: 27px
+
         .price
-            @include barlow-600
+            @include typography.barlow-600
             font-size: 16px
             line-height: 24px
 

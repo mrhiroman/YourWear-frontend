@@ -8,7 +8,7 @@ import { RootState, useAppDispatch } from 'redux/store'
 import { setOrders, setUser } from 'redux/user/slice'
 
 import Logout from 'assets/img/pages/profile/Logout.svg'
-import { OrderService, OrderStatus } from 'generated/api'
+import { OrderService, OrderStatus, WearModel } from 'generated/api'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 
 const MockData: Array<Product> = [
@@ -51,6 +51,13 @@ export const CustomerPage = () => {
     })
   }, [user])
 
+  const getCombinedArray = () => {
+    if(user.publishedWears && orders){
+      return [...new Set([...orders, ...user.publishedWears as WearModel[]])];
+    }
+    return []
+  }
+
   return (
     <div className={styles.container}>
       <span className={styles.title}>User Area</span>  
@@ -69,7 +76,7 @@ export const CustomerPage = () => {
                 <div onClick={() => selectCategory(3)} className={ selectedCategory === 3 ? styles.active : ''}>Published</div>
             </nav>
             <div className={styles.productsList}>
-                {selectedCategory === 0 && (!isLoading ? orders.map((item, i) => <ProductCard key={i} product={item}/>) : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />))}
+                {selectedCategory === 0 && (!isLoading ? getCombinedArray().map((item, i) => <ProductCard key={i} product={item}/>) : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />))}
                 {selectedCategory === 1 && orders.filter(x => x.orderStatus === OrderStatus.DRAFT).map((item, i) => <ProductCard key={i} product={item}/>)}
                 {selectedCategory === 2 && orders.filter(x => x.orderStatus === OrderStatus.PLACED).map((item, i) => <ProductCard key={i} product={item}/>)}
                 {selectedCategory === 3 && user.publishedWears?.map((item, i) => <ProductCard key={i} product={item}/>)}

@@ -30,7 +30,7 @@ function App() {
   
   }
 
-  OpenAPI.BASE = 'https://localhost:7041'
+  OpenAPI.BASE = 'http://192.168.0.107:5087'
   
   const token = localStorage.getItem("token")
   token && validate(token)
