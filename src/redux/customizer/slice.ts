@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ClothItem } from 'types/types';
+import { OrderModel, WearModel } from 'generated/api';
 
 interface CustomizerState {
-    itemToCustomize?: ClothItem, //replace by actual item type
+    itemToCustomize?: WearModel | OrderModel, //replace by actual item type
     designState: {} | undefined
   }
 
@@ -15,7 +15,7 @@ const customizerSlice = createSlice({
   name: 'customizer',
   initialState,
   reducers: {
-    setItem(state, action: PayloadAction<ClothItem>){
+    setItem(state, action: PayloadAction<WearModel | OrderModel>){
       state.itemToCustomize = action.payload
     },
     setDesignState(state, action: PayloadAction<Object>){

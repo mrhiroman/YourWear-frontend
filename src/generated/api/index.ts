@@ -14,6 +14,7 @@ export type { LoginUserModel } from './models/LoginUserModel';
 export type { OrderModel } from './models/OrderModel';
 export { OrderStatus } from './models/OrderStatus';
 export type { RegisterUserModel } from './models/RegisterUserModel';
+export type { UpdateOrderModel } from './models/UpdateOrderModel';
 export type { UserInfoModel } from './models/UserInfoModel';
 export type { WearModel } from './models/WearModel';
 

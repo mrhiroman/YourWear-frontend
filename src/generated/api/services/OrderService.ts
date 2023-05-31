@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { AddOrderModel } from '../models/AddOrderModel';
 import type { OrderModel } from '../models/OrderModel';
+import type { UpdateOrderModel } from '../models/UpdateOrderModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -60,6 +61,22 @@ id: number,
             path: {
                 'id': id,
             },
+        });
+    }
+
+    /**
+     * @param requestBody 
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static postApiOrdersUpdate(
+requestBody?: UpdateOrderModel,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/orders/update',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

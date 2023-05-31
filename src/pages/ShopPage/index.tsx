@@ -6,6 +6,11 @@ import SuitModel from '../../assets/img/pages/shop/SuitModel.png'
 import { Button, ButtonType } from 'components/ui/Button'
 import { NavLink } from 'react-router-dom'
 import { Product, ProductCard } from 'components/ui/ProductCard'
+import { PublishedWearService } from 'generated/api'
+import { RootState, useAppDispatch } from 'redux/store'
+import { setWears } from 'redux/wears/slice'
+import { useSelector } from 'react-redux'
+import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 
 
 const MockData: Array<Product> = [
@@ -18,6 +23,19 @@ const MockData: Array<Product> = [
 ]
 
 export const ShopPage = () => {
+  const dispatch = useAppDispatch()
+  const wears = useSelector((state: RootState) => state.wears.wears)
+  const [isLoading, setLoading] = React.useState(false)
+
+  React.useEffect(() => {
+    setLoading(true)
+    PublishedWearService.getApiWears()
+    .then(resp => {
+      dispatch(setWears(resp))
+      setLoading(false)
+    })
+  }, [])
+
   return (
     <div className={styles.container}>
       <div className={styles.bannerSuits}>
@@ -36,14 +54,15 @@ export const ShopPage = () => {
     <div className={styles.bannerProducts}>
         <div className={styles.navigation}>
         <nav className={styles.navigationBar}>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>All</NavLink>
             <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Fresh Start</NavLink>
             <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Designs from Users</NavLink>
         </nav>
         <Button type={ButtonType.White} text='Pagination' />
         </div>
         <div className={styles.products}>
-            {MockData.map((item, i) => <ProductCard key={i} product={item}/>)}
+            {!isLoading 
+            ? wears.map((item, i) => <ProductCard key={i} product={item}/>) 
+            : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />)}
         </div>
     </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './CustomerPage.module.sass'
-import { Product, ProductCard } from 'components/ui/ProductCard'
+import { ProductCard } from 'components/ui/ProductCard'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from 'redux/store'
@@ -10,15 +10,6 @@ import { setOrders, setUser } from 'redux/user/slice'
 import Logout from 'assets/img/pages/profile/Logout.svg'
 import { OrderService, OrderStatus, WearModel } from 'generated/api'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
-
-const MockData: Array<Product> = [
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-]
 
 export const CustomerPage = () => {
   const [selectedCategory, setCategory] = React.useState(0)

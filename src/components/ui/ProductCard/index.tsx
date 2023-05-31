@@ -9,8 +9,7 @@ import { Button, ButtonType } from '../Button'
 import { setItem } from 'redux/customizer/slice'
 import { useAppDispatch } from 'redux/store'
 import { useNavigate } from 'react-router-dom'
-import { ClothType, OrderModel, OrderService, OrderStatus, PublishedWearService, WearModel } from 'generated/api'
-import { setOrders } from 'redux/user/slice'
+import { OrderModel, OrderService, OrderStatus, PublishedWearService, WearModel } from 'generated/api'
 
 //add currency from global state(?)
 export type Product = {
@@ -20,7 +19,7 @@ export type Product = {
     isPromo?: boolean
 }
 
-function isOrderModel(value: OrderModel | WearModel): value is OrderModel {
+export function isOrderModel(value: OrderModel | WearModel): value is OrderModel {
   return value.hasOwnProperty('cost');
 }
 
@@ -30,7 +29,7 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
   const img = props.product.imageUrl !== undefined ? props.product.imageUrl : BlackTShirt
 
   const onCustomizeClick = () => {
-      dispatch(setItem({baseImage: img as string, cost: 100, type: props.product.clothType as ClothType})) //fix ClothType
+      dispatch(setItem(props.product)) //fix ClothType
       navigate('/customizer')
       //window.scrollTo(0,0);
   }
@@ -79,6 +78,9 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
         </div>
         <div className={styles.cardInfo}>
             <div className={styles.name}>{isOrderModel(props.product) ? props.product.clothType : props.product.name}</div>
+            { !isOrderModel(props.product) &&
+              <div className={styles.price}>{props.product.clothType}</div>
+            }
             { isOrderModel(props.product) &&
               <div className={styles.price}>${props.product.cost}</div>
             }

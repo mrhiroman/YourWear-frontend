@@ -3,7 +3,7 @@ import styles from './CustomizerPage.module.sass'
 import { useSelector } from 'react-redux/es/exports'
 import { RootState, useAppDispatch } from 'redux/store'
 import { Button, ButtonType } from 'components/ui/Button'
-import { setDesignState } from 'redux/customizer/slice'
+import { setDesignState, setItem } from 'redux/customizer/slice'
 
 import './EditorFix.sass'
 
@@ -12,18 +12,9 @@ import FilerobotImageEditor, {
   TOOLS,
 } from 'react-filerobot-image-editor';
 
-import { OrderService } from 'generated/api'
-import { ClothItem } from 'types/types'
+import { OrderModel, OrderService, PublishedWearService, WearModel } from 'generated/api'
 import { useNavigate } from 'react-router-dom'
-
-const saveImage = (editedImageObject: any, designState: any, item?: ClothItem) => {
-  OrderService.postApiOrders({
-    clothType: item?.type, //fix with actual Item
-    cost: item?.cost,
-    editableObject: JSON.stringify(designState),
-    imageUrl: editedImageObject.imageBase64
-  })
-}
+import { isOrderModel } from 'components/ui/ProductCard'
 
 
 export const CustomizerPage = () => {
@@ -34,22 +25,56 @@ export const CustomizerPage = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  /*const LoadImageFromBackend = () => {
-    OrderService.getApiOrdersGetobject(10)
-    .then(response => {
+  const LoadImageFromBackend = () => {
+    if(isOrderModel(itemToCustomize as (WearModel | OrderModel))) {
+      OrderService.getApiOrdersGetobject(itemToCustomize?.id as number)
+      .then(response => {
+          const state = JSON.parse(response.value)
+          console.log(state)
+          dispatch(setDesignState(state))
+      })
+      .catch(err => console.log(err))
+    } else {
+      PublishedWearService.getApiWearsGetobject(itemToCustomize?.id as number) 
+      .then(response => {
         const state = JSON.parse(response.value)
         console.log(state)
         dispatch(setDesignState(state))
     })
     .catch(err => console.log(err))
-  }*/
+    }
+  }
   
-  /*if(!designState){
-    LoadImageFromBackend()
-  }*/
+  React.useEffect(() => {
+      if(itemToCustomize) LoadImageFromBackend()
+  }, [itemToCustomize])
 
   const shopClick = () => {
     navigate("/shop")
+  }
+
+  const saveImage = (editedImageObject: any, designState: any, item?: WearModel | OrderModel) => {
+    if(isOrderModel(item as (WearModel | OrderModel))){
+      if((item as OrderModel).id) {
+        OrderService.postApiOrdersUpdate({
+          cost: (item as OrderModel).cost,
+          editableObject: JSON.stringify(designState),
+          imageUrl: editedImageObject.imageBase64,
+          id: (item as OrderModel).id
+        })
+      }
+    } else {
+      OrderService.postApiOrders({
+        clothType: item?.clothType,
+        cost: 10, //add cost to wears
+        editableObject: JSON.stringify(designState),
+        imageUrl: editedImageObject.imageBase64
+      })
+    }
+  
+    dispatch(setItem({}))
+    //dispatch(setDesignState({}))
+    navigate("/profile")
   }
 
   if(!(itemToCustomize || designState)){
@@ -79,8 +104,8 @@ export const CustomizerPage = () => {
           disableZooming={true}
           savingPixelRatio={4}
           previewPixelRatio={window.devicePixelRatio}
-          // @ts-ignore
-          source={itemToCustomize ? itemToCustomize.baseImage : designState?.imgSrc}
+          //@ts-ignore
+          source={designState && designState?.imgSrc}
           onBeforeSave={(editedImageObject) => {
 
             return false}
@@ -101,6 +126,7 @@ export const CustomizerPage = () => {
           defaultTabId={TABS.ANNOTATE} // or 'Annotate'
           defaultToolId={TOOLS.IMAGE} // or 'Text'
           loadableDesignState={designState}
+          closeAfterSave={true}
         />
     </div>
   )
