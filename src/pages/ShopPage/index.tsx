@@ -11,6 +11,9 @@ import { RootState, useAppDispatch } from 'redux/store'
 import { setWears } from 'redux/wears/slice'
 import { useSelector } from 'react-redux'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
+import { Pagination } from 'components/ui/Pagination'
+import { setCurrentPage } from 'redux/products/slice'
+import { Sort } from 'components/ui/Popup'
 
 
 const MockData: Array<Product> = [
@@ -26,6 +29,18 @@ export const ShopPage = () => {
   const dispatch = useAppDispatch()
   const wears = useSelector((state: RootState) => state.wears.wears)
   const [isLoading, setLoading] = React.useState(false)
+
+  // const products = useSelector((state: RootState) => state.products.products)
+  const currentPage = useSelector((state: RootState) => state.products.currentPage)
+
+   const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
+  };
+
+  const [sortType, setSortType] = React.useState({
+    name: 'test',
+    sortProperty: 'test',
+  });
 
   React.useEffect(() => {
     setLoading(true)
@@ -57,13 +72,14 @@ export const ShopPage = () => {
             <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Fresh Start</NavLink>
             <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Designs from Users</NavLink>
         </nav>
-        <Button type={ButtonType.White} text='Pagination' />
+        <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
         <div className={styles.products}>
             {!isLoading 
             ? wears.map((item, i) => <ProductCard key={i} product={item}/>) 
             : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />)}
         </div>
+        <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
     </div>
   )
