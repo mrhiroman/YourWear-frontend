@@ -2,13 +2,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { ClothType } from './ClothType';
+import type { CategoryModel } from './CategoryModel';
 
 export type WearModel = {
     id?: number;
     name?: string | null;
     imageUrl?: string | null;
-    clothType?: ClothType;
+    category?: CategoryModel;
     creatorId?: number;
     creatorName?: string | null;
 };

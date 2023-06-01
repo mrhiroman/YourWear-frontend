@@ -6,6 +6,10 @@ import wears from './wears/slice'
 import products from './products/slice'
 
 export const store = configureStore({
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    }),
     reducer: {
         customizer,
         user,

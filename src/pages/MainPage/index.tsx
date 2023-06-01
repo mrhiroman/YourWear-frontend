@@ -6,6 +6,8 @@ import MainPicture from 'assets/img/pages/main/MainBannerPicture.png'
 import CustomizerPicture from 'assets/img/pages/main/CustomizerPicture.png'
 import Testimonial from 'assets/img/pages/main/Testimonial.png'
 
+import BlackTShirt from 'assets/img/mocks/BlackTShirt.png'
+
 import HeartIcon from 'assets/img/pages/main/icons/Heart.svg'
 import FlashIcon from 'assets/img/pages/main/icons/Flash.svg'
 import FilterIcon from 'assets/img/pages/main/icons/Filter.svg'
@@ -15,14 +17,19 @@ import BagIcon from 'assets/img/pages/main/icons/Bag.svg'
 
 import { Product, ProductCard } from 'components/ui/ProductCard'
 import { FeatureCard } from 'components/ui/FeatureCard'
+import { RootState, useAppDispatch } from 'redux/store'
+import { PublishedWearService } from 'generated/api'
+import { setFeaturedWears } from 'redux/wears/slice'
+import { useSelector } from 'react-redux'
+import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 
 const MockData: Array<Product> = [
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
+    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
 ]
 
 const Cards = [
@@ -35,7 +42,20 @@ const Cards = [
 ]
 
 export const MainPage = () => {
-  return (
+    const [isLoading, setLoading] = React.useState(false)
+    const dispatch = useAppDispatch()
+    const featuredWears = useSelector((state: RootState) => state.wears.featured)
+
+    React.useEffect(() => {
+        setLoading(true)
+        PublishedWearService.getApiWearsFeatured()
+        .then(resp => {
+            dispatch(setFeaturedWears(resp))
+            setLoading(false)
+        })
+    },[])
+    
+    return (
     <div className={styles.layout}>
         <div className={styles.bannerMain}>
             <div className={styles.info}>
@@ -69,7 +89,9 @@ export const MainPage = () => {
                 </div>
             </div>
             <div className={styles.products}>
-                {MockData.map((item, i) => <ProductCard key={i} product={item}/>)}
+                {(!isLoading && featuredWears) 
+                 ? featuredWears.map((item, i) => <ProductCard key={i} product={item}/>) 
+                 : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />)}
             </div>
         </div>
         <div className={styles.bannerCustomizer}>

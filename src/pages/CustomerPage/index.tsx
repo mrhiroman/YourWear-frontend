@@ -8,8 +8,9 @@ import { RootState, useAppDispatch } from 'redux/store'
 import { setOrders, setUser } from 'redux/user/slice'
 
 import Logout from 'assets/img/pages/profile/Logout.svg'
-import { OrderService, OrderStatus, WearModel } from 'generated/api'
+import { OrderModel, OrderService, OrderStatus, WearModel } from 'generated/api'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
+import { requestIncludeResponseHeaders } from 'generated/api/core/requestIncludeResponseHeaders'
 
 export const CustomerPage = () => {
   const [selectedCategory, setCategory] = React.useState(0)
@@ -34,10 +35,12 @@ export const CustomerPage = () => {
 
   React.useEffect(() => {
     setIsLoading(true)
-    OrderService.getApiOrders()
+    requestIncludeResponseHeaders<OrderModel[]>(async () => {
+      return await OrderService.getApiOrders()
+    })
     .then(resp => {
-      dispatch(setOrders(resp))
-      console.log(resp)
+      dispatch(setOrders(resp.body))
+      console.log(resp.headers.get('X-Total-Count'))
       setIsLoading(false)
     })
   }, [user])

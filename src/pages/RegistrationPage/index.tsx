@@ -7,7 +7,7 @@ import styles from './RegistrationPage.module.sass'
 import { Button, ButtonType } from 'components/ui/Button'
 import { AuthButton, AuthButtonType } from './AuthButtons'
 import { useGoogleLogin } from '@react-oauth/google'
-import { LoginUserModel, OpenAPI, RegisterUserModel, UserService } from 'generated/api'
+import { LoginUserModel, OpenAPI, RegisterUserModel, UserInfoModel, UserService } from 'generated/api'
 import { useAppDispatch } from 'redux/store'
 import { setUser as setUserStore} from 'redux/user/slice'
 import { useNavigate } from 'react-router-dom'
@@ -24,7 +24,7 @@ export const RegistrationPage = () => {
     const setUser = () => {
         UserService.getApiInfo().then(
             resp => {
-                dispatch(setUserStore(resp))
+                dispatch(setUserStore(resp as UserInfoModel))
             }
         )
     }

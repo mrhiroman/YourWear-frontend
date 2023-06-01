@@ -8,22 +8,14 @@ import { NavLink } from 'react-router-dom'
 import { Product, ProductCard } from 'components/ui/ProductCard'
 import { PublishedWearService } from 'generated/api'
 import { RootState, useAppDispatch } from 'redux/store'
-import { setWears } from 'redux/wears/slice'
+import { setWearCount, setWears } from 'redux/wears/slice'
 import { useSelector } from 'react-redux'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 import { Pagination } from 'components/ui/Pagination'
 import { setCurrentPage } from 'redux/products/slice'
 import { Sort } from 'components/ui/Popup'
+import { requestIncludeResponseHeaders } from 'generated/api/core/requestIncludeResponseHeaders'
 
-
-const MockData: Array<Product> = [
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-    {name: 'test', price: 500},
-]
 
 export const ShopPage = () => {
   const dispatch = useAppDispatch()
@@ -44,9 +36,13 @@ export const ShopPage = () => {
 
   React.useEffect(() => {
     setLoading(true)
-    PublishedWearService.getApiWears()
+    requestIncludeResponseHeaders(async () => {
+      return await PublishedWearService.getApiWears()
+    })
     .then(resp => {
-      dispatch(setWears(resp))
+      dispatch(setWears(resp.body))
+      console.log(resp.headers.get('X-Total-Count'))
+      dispatch(setWearCount(parseInt(resp.headers.get('X-Total-Count') as string)))
       setLoading(false)
     })
   }, [])

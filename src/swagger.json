@@ -36,6 +36,16 @@
         "responses": {
           "200": {
             "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total object count. Use it for pagination!",
+                "schema": {
+                  "type": "integer",
+                  "description": "Total object count. Use it for pagination!",
+                  "format": "int32"
+                }
+              }
+            },
             "content": {
               "text/plain": {
                 "schema": {
@@ -262,6 +272,16 @@
         "responses": {
           "200": {
             "description": "Success",
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total object count. Use it for pagination!",
+                "schema": {
+                  "type": "integer",
+                  "description": "Total object count. Use it for pagination!",
+                  "format": "int32"
+                }
+              }
+            },
             "content": {
               "text/plain": {
                 "schema": {
@@ -382,6 +402,44 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/wears/featured": {
+      "get": {
+        "tags": [
+          "PublishedWear"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WearModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WearModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WearModel"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -608,8 +666,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "clothType": {
-            "$ref": "#/components/schemas/ClothType"
+          "category": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -646,12 +705,15 @@
         },
         "additionalProperties": false
       },
-      "ClothType": {
-        "enum": [
-          "TShirt",
-          "Hoodie"
-        ],
-        "type": "string"
+      "CategoryModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "LoginUserModel": {
         "type": "object",
@@ -689,8 +751,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "clothType": {
-            "$ref": "#/components/schemas/ClothType"
+          "category": {
+            "$ref": "#/components/schemas/CategoryModel"
           },
           "creatorId": {
             "type": "integer",
@@ -786,8 +848,8 @@
             "type": "string",
             "nullable": true
           },
-          "clothType": {
-            "$ref": "#/components/schemas/ClothType"
+          "category": {
+            "$ref": "#/components/schemas/CategoryModel"
           },
           "creatorId": {
             "type": "integer",

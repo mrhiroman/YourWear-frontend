@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { ClothType } from './ClothType';
+import type { CategoryModel } from './CategoryModel';
 import type { OrderStatus } from './OrderStatus';
 
 export type OrderModel = {
@@ -11,7 +11,7 @@ export type OrderModel = {
     editableObject?: string | null;
     orderStatus?: OrderStatus;
     cost?: number;
-    clothType?: ClothType;
+    category?: CategoryModel;
     creatorId?: number;
     creatorName?: string | null;
 };

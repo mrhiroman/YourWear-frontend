@@ -4,11 +4,13 @@ import { OrderModel, UserInfoModel } from 'generated/api';
 interface UserState {
     user: UserInfoModel,
     orders: Array<OrderModel>
+    orderCount: number
 }
 
 const initialState: UserState = {
     user: {},
-    orders: []
+    orders: [],
+    orderCount: 0
 };
 
 const userSlice = createSlice({
@@ -20,11 +22,14 @@ const userSlice = createSlice({
     },
     setOrders(state, action: PayloadAction<Array<OrderModel>>){
       state.orders = action.payload
+    },
+    setOrderCount(state, action: PayloadAction<number>){
+        state.orderCount = action.payload
     }
   },
 });
 
-export const { setUser, setOrders } =
+export const { setUser, setOrders, setOrderCount } =
   userSlice.actions;
 
 export default userSlice.reducer;

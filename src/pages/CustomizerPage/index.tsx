@@ -19,6 +19,7 @@ import { isOrderModel } from 'components/ui/ProductCard'
 
 export const CustomizerPage = () => {
   const [isLoading, setIsLoading] = React.useState(true)
+  const user = useSelector((state: RootState) => state.user.user)
   const itemToCustomize = useSelector((state: RootState) => state.customizer.itemToCustomize)
   const designState = useSelector((state: RootState) => state.customizer.designState)
 
@@ -46,7 +47,7 @@ export const CustomizerPage = () => {
   }
   
   React.useEffect(() => {
-      if(itemToCustomize) LoadImageFromBackend()
+    user.name ? (itemToCustomize?.creatorId && LoadImageFromBackend()) : navigate("/registration")
   }, [itemToCustomize])
 
   const shopClick = () => {
@@ -65,7 +66,7 @@ export const CustomizerPage = () => {
       }
     } else {
       OrderService.postApiOrders({
-        clothType: item?.clothType,
+        category: item?.category?.name,
         cost: 10, //add cost to wears
         editableObject: JSON.stringify(designState),
         imageUrl: editedImageObject.imageBase64
@@ -105,7 +106,7 @@ export const CustomizerPage = () => {
           savingPixelRatio={4}
           previewPixelRatio={window.devicePixelRatio}
           //@ts-ignore
-          source={designState && designState?.imgSrc}
+          source={designState ? designState?.imgSrc : itemToCustomize?.imageUrl}
           onBeforeSave={(editedImageObject) => {
 
             return false}

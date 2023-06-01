@@ -27,6 +27,7 @@ limit: number = -1,
                 'page': page,
                 'limit': limit,
             },
+            responseHeader: 'X-Total-Count'
         });
     }
 
@@ -77,6 +78,17 @@ id: number,
             path: {
                 'id': id,
             },
+        });
+    }
+
+    /**
+     * @returns WearModel Success
+     * @throws ApiError
+     */
+    public static getApiWearsFeatured(): CancelablePromise<Array<WearModel>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/wears/featured',
         });
     }
 

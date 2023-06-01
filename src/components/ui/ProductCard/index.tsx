@@ -16,7 +16,10 @@ export type Product = {
     name: string, 
     price: number,
     imageUrl?: string,
-    isPromo?: boolean
+    isPromo?: boolean,
+    category: {
+      name: string
+    }
 }
 
 export function isOrderModel(value: OrderModel | WearModel): value is OrderModel {
@@ -29,7 +32,8 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
   const img = props.product.imageUrl !== undefined ? props.product.imageUrl : BlackTShirt
 
   const onCustomizeClick = () => {
-      dispatch(setItem(props.product)) //fix ClothType
+      dispatch(setItem(props.product))
+      console.log(props.product) //fix ClothType
       navigate('/customizer')
       //window.scrollTo(0,0);
   }
@@ -77,9 +81,9 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
             </div>
         </div>
         <div className={styles.cardInfo}>
-            <div className={styles.name}>{isOrderModel(props.product) ? props.product.clothType : props.product.name}</div>
+            <div className={styles.name}>{isOrderModel(props.product) ? props.product.category?.name : props.product.name}</div>
             { !isOrderModel(props.product) &&
-              <div className={styles.price}>{props.product.clothType}</div>
+              <div className={styles.price}>{props.product.category?.name}</div>
             }
             { isOrderModel(props.product) &&
               <div className={styles.price}>${props.product.cost}</div>

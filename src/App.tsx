@@ -23,6 +23,7 @@ function App() {
     UserService.getApiInfo() //Todo make a special metod to check login
     .then(resp => {
       dispatch(setUser(resp))
+      console.log(resp)
     })
     .catch(err => {
       OpenAPI.TOKEN = ''
@@ -30,7 +31,7 @@ function App() {
   
   }
 
-  OpenAPI.BASE = 'http://192.168.0.107:5087'
+  OpenAPI.BASE = 'http://localhost:5087'
   
   const token = localStorage.getItem("token")
   token && validate(token)
