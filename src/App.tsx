@@ -9,14 +9,16 @@ import { useAppDispatch } from 'redux/store';
 import { ShopPage } from 'pages/ShopPage';
 import { RegistrationPage } from 'pages/RegistrationPage';
 import { CustomerPage } from 'pages/CustomerPage';
-import { OpenAPI, UserService } from 'generated/api';
+import { CategoryService, OpenAPI, UserService } from 'generated/api';
 
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { setUser } from 'redux/user/slice';
+import { setCategories } from 'redux/filters/slice';
 
 
 function App() {
   const dispatch = useAppDispatch()
+
   const validate = (token: string) => {
     OpenAPI.TOKEN = token
   
@@ -33,9 +35,17 @@ function App() {
 
   OpenAPI.BASE = 'http://localhost:5087'
   
-  const token = localStorage.getItem("token")
-  token && validate(token)
-  
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("token")
+    token && validate(token)
+
+    CategoryService.getApiCategories()
+    .then(resp => dispatch(setCategories(['All', ...resp])))
+  })
+
+ 
+
   return (
     <BrowserRouter>
         <GoogleOAuthProvider clientId='611860978924-1ktei1s71qsseenjboeubgdnmq8oa2v0.apps.googleusercontent.com'>

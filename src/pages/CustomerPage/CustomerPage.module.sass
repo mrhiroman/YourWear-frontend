@@ -50,11 +50,18 @@
 
     .products
         padding: 30px
+        display: flex
+        flex-direction: column
+
+        .topPanel
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            width: 1256px
 
         .navigation
             display: flex
-            justify-content: space-between
-            width: 430px
+            gap: 30px
             align-items: center
             @media (max-width: 1300px)
                 margin: 0 auto
@@ -75,6 +82,11 @@
 
             .active
                 color: rgba(20, 58, 121, 1)
+
+        .paginationBlock
+            display: flex
+            justify-content: center
+            margin-top: 15px
 
         &List
             margin-top: 30px

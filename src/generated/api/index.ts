@@ -18,6 +18,7 @@ export type { UpdateOrderModel } from './models/UpdateOrderModel';
 export type { UserInfoModel } from './models/UserInfoModel';
 export type { WearModel } from './models/WearModel';
 
+export { CategoryService } from './services/CategoryService';
 export { OrderService } from './services/OrderService';
 export { PublishedWearService } from './services/PublishedWearService';
 export { UserService } from './services/UserService';

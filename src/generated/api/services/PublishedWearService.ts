@@ -13,12 +13,14 @@ export class PublishedWearService {
     /**
      * @param page 
      * @param limit 
+     * @param category 
      * @returns WearModel Success
      * @throws ApiError
      */
     public static getApiWears(
 page: number = -1,
 limit: number = -1,
+category: string = '',
 ): CancelablePromise<Array<WearModel>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -26,8 +28,8 @@ limit: number = -1,
             query: {
                 'page': page,
                 'limit': limit,
+                'category': category,
             },
-            responseHeader: 'X-Total-Count'
         });
     }
 

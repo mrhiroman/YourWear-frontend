@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import customizer from './customizer/slice'
 import user from './user/slice'
 import wears from './wears/slice'
-import products from './products/slice'
+import filters from './filters/slice'
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
@@ -14,7 +14,7 @@ export const store = configureStore({
         customizer,
         user,
         wears,
-        products
+        filters
     },
 })
 

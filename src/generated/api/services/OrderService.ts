@@ -14,12 +14,14 @@ export class OrderService {
     /**
      * @param page 
      * @param limit 
+     * @param category 
      * @returns OrderModel Success
      * @throws ApiError
      */
     public static getApiOrders(
 page: number = -1,
 limit: number = -1,
+category: string = '',
 ): CancelablePromise<Array<OrderModel>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -27,6 +29,7 @@ limit: number = -1,
             query: {
                 'page': page,
                 'limit': limit,
+                'category': category,
             },
         });
     }
