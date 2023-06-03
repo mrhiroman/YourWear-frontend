@@ -1,11 +1,9 @@
-@mixin barlow-600
-    font-family: 'Barlow', sans-serif
-    font-weight: 600
+@use "src/sass/typography"
 
 .button
     padding: 12px 20px
     border-radius: 80px
-    @include barlow-600
+    @include typography.barlow-600
     text-transform: uppercase
     letter-spacing: 1px
     font-size: 16px

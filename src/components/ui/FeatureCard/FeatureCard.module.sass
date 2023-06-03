@@ -1,14 +1,4 @@
-@mixin barlow-400
-    font-family: 'Barlow', sans-serif
-    font-weight: 400
-
-@mixin barlow-600
-    font-family: 'Barlow', sans-serif
-    font-weight: 600
-
-@mixin montserrat
-    font-family: 'Montserrat', sans-serif
-    font-weight: 500
+@use src/sass/typography
 
 .card
     display: flex
@@ -26,14 +16,14 @@
         height: 40px
 
     .caption
-        @include montserrat
+        @include typography.montserrat
         font-size: 28px
         line-height: 36px
         margin-top: 24px
 
     .description
         margin-top: 8px
-        @include barlow-400
+        @include typography.barlow-400
         font-size: 16px
         line-height: 24px
         color: #4F4F4F

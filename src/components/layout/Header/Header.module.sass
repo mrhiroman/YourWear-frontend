@@ -1,14 +1,4 @@
-@mixin barlow-400
-    font-family: 'Barlow', sans-serif
-    font-weight: 400
-
-@mixin barlow-600
-    font-family: 'Barlow', sans-serif
-    font-weight: 600
-
-@mixin montserrat
-    font-family: 'Montserrat', sans-serif
-    font-weight: 500
+@use "src/sass/typography"
 
 .layout
     display: flex
@@ -42,7 +32,7 @@
         display: flex
         flex-direction: row
         gap: 24px
-        @include barlow-400
+        @include typography.barlow-400
         color: white
         margin-left: 8%
         padding: 14px 0
@@ -52,7 +42,7 @@
         display: flex
         flex-direction: row
         gap: 16px
-        @include barlow-400
+        @include typography.barlow-400
         color: white
         margin-right: 8%
         padding: 9px 0
@@ -81,7 +71,7 @@
     align-items: center
     gap: 10px
     cursor: pointer
-    @include montserrat
+    @include typography.montserrat
     font-size: 28px
     line-height: 36px
     color: #143A79
@@ -101,7 +91,7 @@
     align-items: center
     margin-left: 84px
     gap: 40px
-    @include barlow-400
+    @include typography.barlow-400
     font-size: 20px
     line-height: 30px
 
@@ -141,7 +131,7 @@
         background: rgba(0,0,0,0.2)
 
     .name
-        @include montserrat
+        @include typography.montserrat
         display: flex
         align-items: center
 
