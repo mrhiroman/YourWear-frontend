@@ -4,13 +4,13 @@ import { OrderModel, UserInfoModel } from 'generated/api';
 interface UserState {
     user: UserInfoModel,
     orders: Array<OrderModel>
-    orderCount: number
+    orderCount: number,
 }
 
 const initialState: UserState = {
     user: {},
     orders: [],
-    orderCount: 0
+    orderCount: 0,
 };
 
 const userSlice = createSlice({
