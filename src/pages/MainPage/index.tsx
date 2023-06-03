@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './MainPage.module.sass'
 import { Button, ButtonType } from 'components/ui/Button'
 
-import MainPicture from 'assets/img/pages/main/MainBannerPicture.png'
+import ClothLogo from 'assets/img/pages/main/icons/ClothLogo.svg'
 import CustomizerPicture from 'assets/img/pages/main/CustomizerPicture.png'
 import Testimonial from 'assets/img/pages/main/Testimonial.png'
 
@@ -72,7 +72,7 @@ export const MainPage = () => {
                 </div>
             </div>
             <div className={styles.picture}>
-                <img src={MainPicture} alt='man' />
+                <img src={ClothLogo} alt='logo' />
             </div>
         </div>
         <div className={styles.bannerShop}>
@@ -95,7 +95,7 @@ export const MainPage = () => {
             </div>
         </div>
         <div className={styles.bannerCustomizer}>
-            <div className={styles.pictures}>
+            <div className={styles.picture}>
                 <img src={CustomizerPicture} alt='customize_picture' />
             </div>
             <div className={styles.info}>
