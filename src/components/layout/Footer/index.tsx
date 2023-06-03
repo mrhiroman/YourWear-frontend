@@ -10,6 +10,7 @@ export const Footer = () => {
   return (
     <div className={styles.layout}>
         <div className={styles.footerUpper}>
+            <div className={styles.texts}>
             <div>
                 <div className={styles.logoContainer}>
                     <div className={styles.logo}>
@@ -31,6 +32,7 @@ export const Footer = () => {
                 <Link to="">About Page</Link>
                 <Link to="">Terms and Conditions</Link>
                 <Link to="">Privacy Policy</Link>
+            </div>
             </div>
         </div>
         <div className={styles.footerLower}>

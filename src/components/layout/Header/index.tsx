@@ -55,14 +55,6 @@ export const Header = () => {
                     <img src={Phone} alt='phone' /> 88005553535
                 </div>
             </div>
-            <div className={styles.upperRight}>
-                <div className={styles.picker}>
-                    English <img src={Arrow} alt='arrow' />
-                </div>
-                <div className={styles.picker}>
-                    USD <img src={Arrow} alt='arrow' />
-                </div>
-            </div>
         </div>
         <div className={styles.headerMain}>
             <div className={styles.headerMainLeft}>
