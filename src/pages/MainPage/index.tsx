@@ -6,8 +6,6 @@ import ClothLogo from 'assets/img/pages/main/icons/ClothLogo.svg'
 import CustomizerPicture from 'assets/img/pages/main/CustomizerPicture.png'
 import Testimonial from 'assets/img/pages/main/Testimonial.png'
 
-import BlackTShirt from 'assets/img/mocks/BlackTShirt.png'
-
 import HeartIcon from 'assets/img/pages/main/icons/Heart.svg'
 import FlashIcon from 'assets/img/pages/main/icons/Flash.svg'
 import FilterIcon from 'assets/img/pages/main/icons/Filter.svg'
@@ -15,7 +13,7 @@ import LockIcon from 'assets/img/pages/main/icons/Lock.svg'
 import TruckIcon from 'assets/img/pages/main/icons/Truck.svg'
 import BagIcon from 'assets/img/pages/main/icons/Bag.svg'
 
-import { Product, ProductCard } from 'components/ui/ProductCard'
+import { ProductCard } from 'components/ui/ProductCard'
 import { FeatureCard } from 'components/ui/FeatureCard'
 import { RootState, useAppDispatch } from 'redux/store'
 import { PublishedWearService } from 'generated/api'
@@ -23,14 +21,6 @@ import { setFeaturedWears } from 'redux/wears/slice'
 import { useSelector } from 'react-redux'
 import { ProductSkeleton } from 'components/ui/ProductCard/Skeleton'
 
-const MockData: Array<Product> = [
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-    {name: 'test', price: 500, imageUrl: BlackTShirt, category: {name: 'TShirt'}},
-]
 
 const Cards = [
     {icon: HeartIcon, caption: 'Trusted', description: 'You can start from one of the many pre-designed shirts and customise it, or start with the fabric and select each detail one by one, until you’ve created your desired design'},

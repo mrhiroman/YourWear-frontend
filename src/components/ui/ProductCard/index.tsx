@@ -10,17 +10,9 @@ import { setItem } from 'redux/customizer/slice'
 import { useAppDispatch } from 'redux/store'
 import { useNavigate } from 'react-router-dom'
 import { OrderModel, OrderService, OrderStatus, PublishedWearService, WearModel } from 'generated/api'
+import { setCurrentProfilePage } from 'redux/filters/slice'
 
-//add currency from global state(?)
-export type Product = {
-    name: string, 
-    price: number,
-    imageUrl?: string,
-    isPromo?: boolean,
-    category: {
-      name: string
-    }
-}
+
 
 export function isOrderModel(value: OrderModel | WearModel): value is OrderModel {
   return value.hasOwnProperty('cost');
@@ -40,9 +32,10 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
 
   const onUndraftClick = () => {
     if(window.confirm("Place Your order? You will not be able to edit it anymore!")){
-      OrderService.getApiOrdersUndraft(props.product.id as number).then(resp => 
+      OrderService.getApiOrdersUndraft(props.product.id as number).then(resp => {
         alert('Success!')
-      ).catch(err => alert(err))
+        dispatch(setCurrentProfilePage(0))
+      }).catch(err => alert(err))
     }
   }
 
@@ -56,7 +49,10 @@ export const ProductCard = (props: {product: OrderModel | WearModel}) => {
         name: name,
         orderId: props.product.id
       })
-      .then(resp => alert('Success'))
+      .then(resp => {
+        alert('Success')
+        dispatch(setCurrentProfilePage(0))
+      })
       .catch(err => alert(err))
     }
   }

@@ -55,13 +55,26 @@ export const CustomerPage = () => {
     }
   }
 
+  const currentStatus = (n: number) => {
+    switch(n){
+      case 1:
+        return 'draft'
+      case 2:
+        return 'placed'
+      default:
+        return ''
+    }
+  }
+
   React.useEffect(() => {
     setIsLoading(true)
     requestIncludeResponseHeaders<OrderModel[]>(async () => {
-      return await OrderService.getApiOrders(currentPage, 6, currentFilter)
+      return await OrderService.getApiOrders(currentPage, 6, currentFilter, 
+        currentStatus(selectedCategory))
     })
     .then(resp => {
       dispatch(setOrders(resp.body))
+      console.log(resp)
       dispatch(setOrderCount(parseInt(resp.headers.get('X-Total-Count') as string)))
       setIsLoading(false)
     })

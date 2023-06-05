@@ -15,6 +15,7 @@ export class OrderService {
      * @param page 
      * @param limit 
      * @param category 
+     * @param status
      * @returns OrderModel Success
      * @throws ApiError
      */
@@ -22,6 +23,7 @@ export class OrderService {
 page: number = -1,
 limit: number = -1,
 category: string = '',
+status: string = ''
 ): CancelablePromise<Array<OrderModel>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -30,6 +32,7 @@ category: string = '',
                 'page': page,
                 'limit': limit,
                 'category': category,
+                'status': status
             },
         });
     }

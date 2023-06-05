@@ -3,7 +3,7 @@ import styles from './CustomizerPage.module.sass'
 import { useSelector } from 'react-redux/es/exports'
 import { RootState, useAppDispatch } from 'redux/store'
 import { Button, ButtonType } from 'components/ui/Button'
-import { setDesignState, setItem } from 'redux/customizer/slice'
+import { setDesignState } from 'redux/customizer/slice'
 
 import './EditorFix.sass'
 
@@ -73,7 +73,7 @@ export const CustomizerPage = () => {
       })
     }
   
-    dispatch(setItem({}))
+    //dispatch(setItem({}))
     //dispatch(setDesignState({}))
     navigate("/profile")
   }

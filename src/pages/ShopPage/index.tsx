@@ -4,7 +4,6 @@ import styles from './ShopPage.module.sass'
 
 import SuitModel from '../../assets/img/pages/shop/SuitModel.png'
 import { Button, ButtonType } from 'components/ui/Button'
-import { NavLink } from 'react-router-dom'
 import { ProductCard } from 'components/ui/ProductCard'
 import { PublishedWearService } from 'generated/api'
 import { RootState, useAppDispatch } from 'redux/store'
@@ -21,9 +20,10 @@ export const ShopPage = () => {
   const dispatch = useAppDispatch()
   const wears = useSelector((state: RootState) => state.wears.wears)
   const [isLoading, setLoading] = React.useState(false)
+  const [selectedCategory, setCategory] = React.useState(0)
 
   const currentPage = useSelector((state: RootState) => state.filters.currentShopPage)
-  const currentCategory = useSelector((state: RootState) => state.filters.currentShopCategory)
+  const currentFilter = useSelector((state: RootState) => state.filters.currentShopCategory)
   const categories = useSelector((state: RootState) => state.filters.categories)
   const wearsCount = useSelector((state: RootState) => state.wears.wearCount)
 
@@ -31,24 +31,36 @@ export const ShopPage = () => {
     dispatch(setCurrentShopPage(page));
   };
 
-  const onChangeCategory = (category: string) => {
+  const onChangeFilter = (category: string) => {
     dispatch(setCurrentShopCategory(category));
     dispatch(setCurrentShopPage(1));
   };
 
+  const selectCategory = (id: number) => {
+    setCategory(id)
+  }
+
   React.useEffect(() => {
     setLoading(true)
-    requestIncludeResponseHeaders(async () => {
-      return await PublishedWearService.getApiWears(currentPage, 6, currentCategory === 'All' ? '' : currentCategory)
-    })
-    .then(resp => {
-      console.log(resp);
-      dispatch(setWears(resp.body))
-      console.log(resp.headers.get('X-Total-Count'))
-      dispatch(setWearCount(parseInt(resp.headers.get('X-Total-Count') as string)))
-      setLoading(false)
-    })
-  }, [currentPage, currentCategory, categories])
+    if(selectedCategory === 0) {
+      PublishedWearService.getApiWearsFeatured()
+      .then(resp => {
+        dispatch(setWears(resp))
+        dispatch(setWearCount(resp.length))
+        setLoading(false)
+      })
+    } else {
+      requestIncludeResponseHeaders(async () => {
+        return await PublishedWearService.getApiWears(currentPage, 6, currentFilter === 'All' ? '' : currentFilter)
+      })
+      .then(resp => {
+        dispatch(setWears(resp.body))
+        console.log(resp.headers.get('X-Total-Count'))
+        dispatch(setWearCount(parseInt(resp.headers.get('X-Total-Count') as string)))
+        setLoading(false)
+      })
+  }
+  }, [currentPage, currentFilter, selectedCategory, categories])
 
   return (
     <div className={styles.container}>
@@ -68,17 +80,17 @@ export const ShopPage = () => {
     <div className={styles.bannerProducts}>
         <div className={styles.navigation}>
         <nav className={styles.navigationBar}>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Fresh Start</NavLink>
-            <NavLink to={''} className={ ({isActive}) => isActive ? styles.active : ''}>Designs from Users</NavLink>
+            <div onClick={() => selectCategory(0)} className={ selectedCategory === 0 ? styles.active : ''}>Fresh Start</div>
+            <div onClick={() => selectCategory(1)} className={ selectedCategory === 1 ? styles.active : ''}>Designs from Users</div>
         </nav>
-        <FilterButton categories={categories} selectedValue={currentCategory} onChangeFilter={(i: string) => onChangeCategory(i)} />
+        {selectedCategory === 1 && <FilterButton categories={categories} selectedValue={currentFilter} onChangeFilter={(i: string) => onChangeFilter(i)} />}
         </div>
         <div className={styles.products}>
             {!isLoading 
             ? wears.map((item, i) => <ProductCard key={i} product={item}/>) 
             : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />)}
         </div>
-        <Pagination currentPage={currentPage} onChangePage={onChangePage} pageCount={Math.ceil(wearsCount / 6)}/>
+        {selectedCategory === 1 && <Pagination currentPage={currentPage} onChangePage={onChangePage} pageCount={Math.ceil(wearsCount / 6)}/>}
     </div>
     </div>
   )
