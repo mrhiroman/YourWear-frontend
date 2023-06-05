@@ -72,12 +72,6 @@ export const Header = () => {
             </div>
             <div className={styles.buttons}>
                 <div className={styles.buttonsIcons}>
-                    <div className={styles.icon}>
-                        <img src={Search} alt='search' />
-                    </div>
-                    <div className={styles.icon}>
-                        <img src={Cart} alt='cart' />
-                    </div>
                     {user.email && 
                         <div className={styles.profileButton} onClick={onProfileClick}>
                             <div className={styles.icon}>

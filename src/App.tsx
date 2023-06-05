@@ -33,7 +33,7 @@ function App() {
   
   }
 
-  OpenAPI.BASE = 'http://localhost:5087'
+  OpenAPI.BASE = 'http://localhost:3000'
   
 
   React.useEffect(() => {
