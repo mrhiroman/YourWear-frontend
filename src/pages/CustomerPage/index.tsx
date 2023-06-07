@@ -44,6 +44,7 @@ export const CustomerPage = () => {
 
   const selectCategory = (id: number) => {
     setCategory(id)
+    dispatch(setCurrentProfilePage(1));
   }
 
   const handleLogout = () => {
@@ -98,7 +99,7 @@ export const CustomerPage = () => {
                   <div onClick={() => selectCategory(2)} className={ selectedCategory === 2 ? styles.active : ''}>Ordered</div>
                   <div onClick={() => selectCategory(3)} className={ selectedCategory === 3 ? styles.active : ''}>Published</div>
               </nav>
-              <FilterButton categories={categories} selectedValue={currentFilter} onChangeFilter={(i: string) => onChangeFilter(i)} />
+              {selectedCategory !== 3 && <FilterButton categories={categories} selectedValue={currentFilter} onChangeFilter={(i: string) => onChangeFilter(i)} />}
             </div>
             <div className={styles.productsList}>
                 {selectedCategory === 0 && (!isLoading ? orders.map((item, i) => <ProductCard key={i} product={item}/>) : [...new Array(6)].map((_,i) => <ProductSkeleton key={i} />))}

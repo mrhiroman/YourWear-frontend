@@ -33,7 +33,8 @@ function App() {
   
   }
 
-  OpenAPI.BASE = 'http://localhost:3000'
+  OpenAPI.BASE = 'http://localhost:5087'
+  const googleClientId = '611860978924-1ktei1s71qsseenjboeubgdnmq8oa2v0.apps.googleusercontent.com'
   
 
   React.useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        <GoogleOAuthProvider clientId='611860978924-1ktei1s71qsseenjboeubgdnmq8oa2v0.apps.googleusercontent.com'>
+        <GoogleOAuthProvider clientId={googleClientId}>
         <div className="App">
           <Header />
           <Routes>
